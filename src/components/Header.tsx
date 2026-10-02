@@ -17,7 +17,7 @@ export const Header: React.FC = () => {
    * Actual: Always forces `isMobileMenuOpen` to `false`, preventing the mobile menu from displaying.
    */
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(false);
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const navLinks = [

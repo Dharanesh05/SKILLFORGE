@@ -23,7 +23,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoUrl, title }) => 
    * Actual: Always sets `setIsPlaying(false)`, failing to activate playback.
    */
   const handlePlayPause = () => {
-    setIsPlaying(false);
+    setIsPlaying(!isPlaying);
   };
 
   useEffect(() => {

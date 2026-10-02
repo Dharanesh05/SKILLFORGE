@@ -39,9 +39,9 @@ export default function CourseCataloguePage() {
 
       if (!matchesSearch) return false;
 
-      // INTENTIONAL BUG 2: Category filter checks course.level instead of course.category!
+      // Category filter
       if (selectedCategory !== 'All') {
-        const matchesCategory = course.level === selectedCategory; // Bug!
+        const matchesCategory = course.category === selectedCategory;
         if (!matchesCategory) return false;
       }
 

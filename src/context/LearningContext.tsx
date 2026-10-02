@@ -95,10 +95,9 @@ export const LearningProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const course = COURSES.find(c => c.id === courseId);
     if (!course) return 0;
     const completedList = completedLessonIds[courseId] || [];
-    
-    // BUG 4: Hardcoded denominator 100 instead of total course lessons length
-    const totalLessonsCount = 100;
-    return Math.round((completedList.length / totalLessonsCount) * 100);
+    const totalLessons = course.modules.flatMap(m => m.lessons).length;
+    if (totalLessons === 0) return 0;
+    return Math.round((completedList.length / totalLessons) * 100);
   };
 
   return (

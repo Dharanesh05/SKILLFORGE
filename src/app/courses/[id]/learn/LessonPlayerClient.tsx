@@ -66,9 +66,7 @@ export default function LessonPlayerClient() {
    */
   const handleNextLesson = () => {
     if (currentIndex < allLessons.length - 1) {
-      // BUG 6: Index incremented by 2 instead of 1
-      const wrongNextIndex = currentIndex + 2;
-      const nextLesson = allLessons[wrongNextIndex] || allLessons[allLessons.length - 1];
+      const nextLesson = allLessons[currentIndex + 1];
       setCurrentLesson(nextLesson);
     }
   };

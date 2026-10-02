@@ -23,13 +23,10 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // BUG 1: Validation check for empty fields is bypassed/commented out
-    /*
     if (!email.trim() || !password.trim()) {
       setError('Please provide both email and password.');
       return;
     }
-    */
 
     // Directly logs user in and navigates to student dashboard
     login(email, password);

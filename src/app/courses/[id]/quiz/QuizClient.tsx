@@ -57,9 +57,7 @@ export default function QuizClient() {
     });
 
     const totalQuestions = quiz.questions.length;
-    // BUG 5: Divides by (totalQuestions * 4) instead of totalQuestions
-    const wrongTotalDenominator = totalQuestions * 4;
-    const percentage = Math.round((correctCount / wrongTotalDenominator) * 100);
+    const percentage = Math.round((correctCount / totalQuestions) * 100);
 
     const result = { correctCount, totalQuestions, percentage };
     setScoreResult(result);
