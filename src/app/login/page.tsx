@@ -15,11 +15,6 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
 
-  /**
-   * INTENTIONAL BUG 1: Login accepts empty fields
-   * Expected: Check if `email.trim()` and `password.trim()` are populated; if not, set `error` and prevent submit.
-   * Actual: Validation check is bypassed, allowing submission with empty fields.
-   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -28,34 +23,33 @@ export default function LoginPage() {
       return;
     }
 
-    // Directly logs user in and navigates to student dashboard
     login(email, password);
     router.push('/dashboard');
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-8 space-y-8 shadow-2xl relative overflow-hidden">
-        {/* Glow Accent */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-violet-600/10 blur-3xl rounded-full pointer-events-none" />
+    <div className="bg-[#F8FAF9] min-h-[80vh] flex items-center justify-center px-4 py-16">
+      <div className="w-full max-w-md bg-white border border-[#DCE9DF] rounded-3xl p-8 space-y-8 shadow-xl relative overflow-hidden">
+        {/* Soft Ambient Glow */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-[#D1FAE5]/60 blur-3xl rounded-full pointer-events-none" />
 
         {/* Logo & Header */}
         <div className="text-center space-y-2">
           <Link href="/" className="inline-flex items-center gap-2 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#14532D] via-[#15803D] to-[#10B981] flex items-center justify-center shadow-md shadow-[#15803D]/20">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
-            <span className="font-extrabold text-xl text-white tracking-wider">
+            <span className="font-extrabold text-xl text-[#17251D] tracking-wider">
               SKILLFORGE
             </span>
           </Link>
-          <h1 className="text-2xl font-bold text-white">Welcome Back</h1>
-          <p className="text-xs text-slate-400">Log in to access your courses and student dashboard.</p>
+          <h1 className="text-2xl font-black text-[#17251D]">Welcome Back</h1>
+          <p className="text-xs text-[#647067]">Log in to access your courses and student dashboard.</p>
         </div>
 
-        {/* Validation Error Display (Functional if error is set) */}
+        {/* Validation Error Display */}
         {error && (
-          <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-800/60 text-rose-300 text-xs text-center font-medium">
+          <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs text-center font-bold">
             {error}
           </div>
         )}
@@ -64,17 +58,20 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Email Input */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider block">
+            <label className="text-xs font-bold text-[#17251D] uppercase tracking-wider block">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-[#647067] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 placeholder="student@skillforge.io"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500 transition"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (error) setError('');
+                }}
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#F8FAF9] border border-[#DCE9DF] text-[#17251D] placeholder-[#647067] text-sm font-medium focus:outline-none focus:border-[#15803D] focus:ring-2 focus:ring-[#10B981]/20 transition"
               />
             </div>
           </div>
@@ -82,21 +79,24 @@ export default function LoginPage() {
           {/* Password Input */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider block">
+              <label className="text-xs font-bold text-[#17251D] uppercase tracking-wider block">
                 Password
               </label>
-              <a href="#" className="text-xs text-violet-400 hover:text-violet-300 transition">
+              <a href="#" className="text-xs text-[#15803D] hover:text-[#14532D] font-semibold transition">
                 Forgot Password?
               </a>
             </div>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-[#647067] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 placeholder="••••••••••••"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500 transition"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (error) setError('');
+                }}
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#F8FAF9] border border-[#DCE9DF] text-[#17251D] placeholder-[#647067] text-sm font-medium focus:outline-none focus:border-[#15803D] focus:ring-2 focus:ring-[#10B981]/20 transition"
               />
             </div>
           </div>
@@ -106,12 +106,12 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => setRememberMe(!rememberMe)}
-              className="flex items-center gap-2 text-xs text-slate-400 hover:text-slate-300"
+              className="flex items-center gap-2 text-xs text-[#647067] font-medium hover:text-[#17251D]"
             >
               {rememberMe ? (
-                <CheckSquare className="w-4 h-4 text-violet-400" />
+                <CheckSquare className="w-4 h-4 text-[#15803D]" />
               ) : (
-                <Square className="w-4 h-4 text-slate-600" />
+                <Square className="w-4 h-4 text-[#647067]" />
               )}
               <span>Remember me on this device</span>
             </button>
@@ -120,16 +120,16 @@ export default function LoginPage() {
           {/* Login Submit Button */}
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 shadow-xl shadow-violet-600/25 transition-all"
+            className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-[#15803D] to-[#10B981] hover:from-[#14532D] hover:to-[#15803D] shadow-xl shadow-[#15803D]/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
           >
             Log In <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
         {/* Create Account Link */}
-        <div className="text-center pt-2 border-t border-slate-800/80 text-xs text-slate-400">
+        <div className="text-center pt-2 border-t border-[#DCE9DF] text-xs text-[#647067]">
           Don't have an account?{' '}
-          <a href="#" className="font-bold text-violet-400 hover:text-violet-300 transition">
+          <a href="#" className="font-bold text-[#15803D] hover:text-[#14532D] transition">
             Create Account
           </a>
         </div>

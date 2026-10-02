@@ -8,8 +8,8 @@ import { Footer } from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'SKILLFORGE — Learn. Practice. Build.',
-  description: 'Learn modern technology through practical courses, guided projects, and hands-on challenges.',
+  title: 'SKILLFORGE — Master Engineering & Tech Skills',
+  description: 'Learn modern web development, cloud computing, AI, and cybersecurity through hands-on courses and interactive challenges.',
 };
 
 export default function RootLayout({
@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} bg-slate-950 text-slate-100 flex flex-col min-h-screen selection:bg-violet-600 selection:text-white`}>
+    <html lang="en">
+      <body className={`${inter.className} bg-[#F8FAF9] text-[#17251D] flex flex-col min-h-screen selection:bg-[#15803D] selection:text-white antialiased`}>
         <LearningProvider>
           <Header />
           <main className="flex-grow">{children}</main>

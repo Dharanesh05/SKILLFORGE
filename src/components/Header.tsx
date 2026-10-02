@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, Menu, X, User as UserIcon, LogOut } from 'lucide-react';
+import { BookOpen, Menu, X, User as UserIcon, LogOut, Sparkles } from 'lucide-react';
 import { useLearning } from '../context/LearningContext';
 
 export const Header: React.FC = () => {
@@ -11,11 +11,6 @@ export const Header: React.FC = () => {
   const { isLoggedIn, user, logout } = useLearning();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  /**
-   * INTENTIONAL BUG 7: Mobile navigation menu button not working
-   * Expected: Toggle `isMobileMenuOpen` state (e.g. `setIsMobileMenuOpen(!isMobileMenuOpen)`).
-   * Actual: Always forces `isMobileMenuOpen` to `false`, preventing the mobile menu from displaying.
-   */
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -33,19 +28,19 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white">
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#DCE9DF] text-[#17251D] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#14532D] via-[#15803D] to-[#10B981] flex items-center justify-center shadow-lg shadow-[#15803D]/20 group-hover:scale-105 transition-transform duration-300">
               <BookOpen className="w-5 h-5 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
+              <span className="font-extrabold text-xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-[#14532D] via-[#15803D] to-[#10B981]">
                 SKILLFORGE
               </span>
-              <span className="text-[10px] tracking-widest text-violet-400 font-semibold uppercase -mt-1">
+              <span className="text-[10px] tracking-widest text-[#15803D] font-bold uppercase -mt-1 flex items-center gap-1">
                 Learn. Practice. Build.
               </span>
             </div>
@@ -53,19 +48,22 @@ export const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  isActive(link.href)
-                    ? 'text-white bg-slate-800/80 border border-slate-700/50'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800/40'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                    active
+                      ? 'text-[#14532D] bg-[#D1FAE5] border border-[#10B981]/30 shadow-sm'
+                      : 'text-[#647067] hover:text-[#17251D] hover:bg-[#F0FDF4]'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop Action Buttons / User Menu */}
@@ -74,14 +72,16 @@ export const Header: React.FC = () => {
               <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm border border-slate-700 transition"
+                  className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#F0FDF4] hover:bg-[#D1FAE5] text-[#14532D] text-sm font-semibold border border-[#DCE9DF] transition-all shadow-sm"
                 >
-                  <UserIcon className="w-4 h-4 text-violet-400" />
-                  <span className="font-medium">{user?.name || 'Dashboard'}</span>
+                  <div className="w-6 h-6 rounded-lg bg-[#15803D] text-white flex items-center justify-center text-xs font-bold">
+                    {user?.name ? user.name.charAt(0).toUpperCase() : 'S'}
+                  </div>
+                  <span className="font-semibold">{user?.name || 'Dashboard'}</span>
                 </Link>
                 <button
                   onClick={logout}
-                  className="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition"
+                  className="p-2 rounded-xl text-[#647067] hover:text-rose-600 hover:bg-rose-50 transition border border-transparent hover:border-rose-200"
                   title="Log out"
                 >
                   <LogOut className="w-4 h-4" />
@@ -91,15 +91,15 @@ export const Header: React.FC = () => {
               <>
                 <Link
                   href="/login"
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white transition"
+                  className="px-4 py-2 rounded-xl text-sm font-semibold text-[#17251D] hover:text-[#15803D] hover:bg-[#F0FDF4] transition"
                 >
                   Log In
                 </Link>
                 <Link
                   href="/courses"
-                  className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-md shadow-violet-600/20 transition"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-[#15803D] to-[#10B981] hover:from-[#14532D] hover:to-[#15803D] shadow-md shadow-[#15803D]/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                 >
-                  Get Started
+                  <Sparkles className="w-4 h-4" /> Get Started
                 </Link>
               </>
             )}
@@ -110,13 +110,13 @@ export const Header: React.FC = () => {
             <button
               onClick={toggleMobileMenu}
               type="button"
-              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none"
+              className="p-2 rounded-xl text-[#17251D] hover:bg-[#F0FDF4] border border-[#DCE9DF] focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6 text-violet-400" />
+                <X className="w-6 h-6 text-[#15803D]" />
               ) : (
-                <Menu className="w-6 h-6 text-slate-200" />
+                <Menu className="w-6 h-6 text-[#17251D]" />
               )}
             </button>
           </div>
@@ -125,25 +125,32 @@ export const Header: React.FC = () => {
 
       {/* Mobile Navigation Menu Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-800 bg-slate-900 px-4 pt-3 pb-6 space-y-2 shadow-2xl">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={`block px-3 py-2.5 rounded-lg text-base font-medium transition ${
-                isActive(link.href)
-                  ? 'text-white bg-violet-600/20 text-violet-300 border border-violet-500/30'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-800'
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <div className="pt-4 border-t border-slate-800 flex flex-col gap-2">
+        <div className="md:hidden border-t border-[#DCE9DF] bg-white px-4 pt-3 pb-6 space-y-2 shadow-xl animate-fade-in">
+          {navLinks.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block px-4 py-3 rounded-xl text-base font-semibold transition ${
+                  active
+                    ? 'text-[#14532D] bg-[#D1FAE5] border border-[#10B981]/30 font-bold'
+                    : 'text-[#647067] hover:text-[#17251D] hover:bg-[#F0FDF4]'
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+          <div className="pt-4 border-t border-[#DCE9DF] flex flex-col gap-2">
             {isLoggedIn ? (
               <button
-                onClick={logout}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-800 text-slate-200 hover:text-rose-400 text-sm font-medium"
+                onClick={() => {
+                  logout();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-rose-50 text-rose-700 hover:bg-rose-100 font-semibold text-sm border border-rose-200"
               >
                 <LogOut className="w-4 h-4" /> Log Out
               </button>
@@ -151,13 +158,15 @@ export const Header: React.FC = () => {
               <>
                 <Link
                   href="/login"
-                  className="w-full text-center px-4 py-2.5 rounded-lg text-sm font-medium text-slate-200 bg-slate-800 hover:bg-slate-700"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full text-center px-4 py-3 rounded-xl text-sm font-semibold text-[#17251D] bg-[#F8FAF9] border border-[#DCE9DF] hover:bg-[#F0FDF4]"
                 >
                   Log In
                 </Link>
                 <Link
                   href="/courses"
-                  className="w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-violet-600 hover:bg-violet-500"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full text-center px-4 py-3 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-[#15803D] to-[#10B981] shadow-md shadow-[#15803D]/20"
                 >
                   Get Started
                 </Link>
