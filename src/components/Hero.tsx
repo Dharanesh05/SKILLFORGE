@@ -100,11 +100,11 @@ export const Hero: React.FC = () => {
               {/* Code Snippet Box */}
               <div className="p-4 rounded-xl bg-[#17251D] text-white font-mono text-xs space-y-2 shadow-inner">
                 <div className="flex items-center justify-between text-emerald-400">
-                  <span>// Full Stack React & Node Architecture</span>
+                  <span>{`// Full Stack React & Node Architecture`}</span>
                   <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
                 </div>
                 <p className="text-slate-300">
-                  <span className="text-emerald-400">const</span> course = <span className="text-amber-300">useCourse</span>(<span className="text-emerald-300">'full-stack-dev'</span>);
+                  <span className="text-emerald-400">const</span> course = <span className="text-amber-300">useCourse</span>(<span className="text-emerald-300">&apos;full-stack-dev&apos;</span>);
                 </p>
                 <p className="text-slate-300">
                   <span className="text-emerald-400">await</span> course.<span className="text-emerald-300">executeDiagnosticQuiz</span>();

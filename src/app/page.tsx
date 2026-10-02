@@ -257,7 +257,7 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p className="text-xs text-[#17251D] italic leading-relaxed">
-                    "{t.text}"
+                    &quot;{t.text}&quot;
                   </p>
                 </div>
 
