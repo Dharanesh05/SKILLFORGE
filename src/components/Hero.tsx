@@ -2,8 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight, Play, Sparkles, ShieldCheck, Users, Award, Code, CheckCircle } from 'lucide-react';
+import { ArrowRight, Play, Sparkles, ShieldCheck, Award, Code, CheckCircle } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
@@ -15,12 +14,7 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Hero Copy Column */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-7 text-left"
-          >
+          <div className="lg:col-span-7 space-y-7 text-left animate-slide-up">
             {/* Tagline Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D1FAE5] border border-[#10B981]/30 text-[#14532D] text-xs font-bold uppercase tracking-wider shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-[#15803D]" />
@@ -73,15 +67,10 @@ export const Hero: React.FC = () => {
                 <div className="text-xs text-[#647067] font-medium">Student Rating</div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Interactive 3D Perspective Card Mockup */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-5 relative"
-          >
+          <div className="lg:col-span-5 relative animate-fade-in">
             <div className="relative rounded-3xl bg-white border border-[#DCE9DF] p-6 shadow-2xl shadow-[#15803D]/15 space-y-6">
               
               {/* Header Floating Badge */}
@@ -129,11 +118,7 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Floating Badge Accent */}
-              <motion.div 
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -bottom-6 -left-6 bg-white border border-[#DCE9DF] p-4 rounded-2xl shadow-xl flex items-center gap-3 hidden sm:flex"
-              >
+              <div className="absolute -bottom-6 -left-6 bg-white border border-[#DCE9DF] p-4 rounded-2xl shadow-xl flex items-center gap-3 hidden sm:flex animate-float">
                 <div className="w-10 h-10 rounded-xl bg-[#D1FAE5] text-[#14532D] flex items-center justify-center font-bold">
                   <Award className="w-5 h-5 text-[#15803D]" />
                 </div>
@@ -141,12 +126,13 @@ export const Hero: React.FC = () => {
                   <div className="text-xs font-bold text-[#17251D]">Diagnostic Score: 100%</div>
                   <div className="text-[11px] text-[#647067]">Module 1 Verified</div>
                 </div>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>
     </div>
   );
 };
+

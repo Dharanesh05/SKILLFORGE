@@ -98,12 +98,9 @@ export default function QuizClient() {
             const selectedOption = selectedAnswers[qIdx];
 
             return (
-              <motion.div
+              <div
                 key={q.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: qIdx * 0.05 }}
-                className="bg-white border border-[#DCE9DF] rounded-2xl p-6 space-y-4 shadow-sm"
+                className="bg-white border border-[#DCE9DF] rounded-2xl p-6 space-y-4 shadow-sm animate-slide-up"
               >
                 <div className="flex items-start gap-3">
                   <span className="w-7 h-7 rounded-lg bg-[#D1FAE5] text-[#14532D] font-bold text-xs flex items-center justify-center shrink-0 border border-[#10B981]/30">
@@ -153,7 +150,7 @@ export default function QuizClient() {
                     );
                   })}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -170,10 +167,8 @@ export default function QuizClient() {
             </button>
           </div>
         ) : (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white border border-[#10B981]/50 rounded-2xl p-8 text-center space-y-6 shadow-xl"
+          <div 
+            className="bg-white border border-[#10B981]/50 rounded-2xl p-8 text-center space-y-6 shadow-xl animate-fade-in"
           >
             <div className="w-16 h-16 rounded-full bg-[#D1FAE5] border border-[#10B981]/30 flex items-center justify-center mx-auto text-[#15803D]">
               <Award className="w-8 h-8" />
@@ -208,7 +203,7 @@ export default function QuizClient() {
                 Back to Course <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>
